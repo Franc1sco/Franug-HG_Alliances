@@ -10,7 +10,7 @@ new Handle:array_icons;
 
 public Plugin:myinfo =
 {
-        name = "Hunger Games Teams",
+        name = "Hunger Games Alliance",
         author = "Franc1sco franug",
         description = "",
         version = "1.0.0",
