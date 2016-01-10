@@ -8,22 +8,28 @@ new icon[MAXPLAYERS+1];
 new Handle:array_icons_base;
 new Handle:array_icons;
 
+Handle cvar_hp, cvar_grenade
+
 public Plugin:myinfo =
 {
-        name = "Hunger Games Alliance",
-        author = "Franc1sco franug",
-        description = "",
-        version = "1.0.0",
-        url = "http://steamcommunity.com/id/franug"
+	name = "Hunger Games Alliance",
+	author = "Franc1sco franug",
+	description = "",
+	version = "1.0.1",
+	url = "http://steamcommunity.com/id/franug"
 };
 
 public OnPluginStart()
 {
-        array_icons_base = CreateArray();
-        array_icons = CreateArray();
+	array_icons_base = CreateArray();
+	array_icons = CreateArray();
 
-        HookEvent("round_start", Event_Start);
-        HookEvent("player_death", event_Death, EventHookMode_Pre);
+	HookEvent("round_start", Event_Start);
+	HookEvent("player_death", event_Death, EventHookMode_Pre);
+	
+	cvar_hp = CreateConVar("sm_hgalliance_hp", "1", "Enable or disable earn health");
+	cvar_grenade = CreateConVar("sm_hgalliance_grenade", "1", "Enable or disable the give grenades feature");
+	
 }
 
 public OnMapStart()
@@ -99,21 +105,23 @@ public Action:Event_Start(Handle:event, const String:name[], bool:dontBroadcast)
 
 public Action:event_Death(Handle:event, const String:name[], bool:dontBroadcast)
 {
-        new client = GetClientOfUserId(GetEventInt(event, "userid"));
-        LimpiarAdjunto(client);
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	LimpiarAdjunto(client);
+	
+	if(!GetConVarBool(cvar_hp)) return;
+	
+	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+	if(IsValidClient(attacker) && equipo[client] != 0)
+	{
+		new vida = GetClientHealth(attacker);
 
-        new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-        if(IsValidClient(attacker) && equipo[client] != 0)
-        {
-                new vida = GetClientHealth(attacker);
+		if(equipo[attacker] == equipo[client]) vida += 15;
+		else if(equipo[attacker] == 0) vida += 5;
 
-                if(equipo[attacker] == equipo[client]) vida += 15;
-                else if(equipo[attacker] == 0) vida += 5;
+		if(vida > 115) vida = 115;
 
-                if(vida > 115) vida = 115;
-
-                SetEntityHealth(attacker, vida);
-        }
+		SetEntityHealth(attacker, vida);
+	}
 }
 
 public IsValidClient( client )
@@ -247,8 +255,9 @@ CreateIcon(client)
 
 GanarGranada(client)
 {
-        new aleatorio = GetRandomInt(1, 100);
-        if(aleatorio == 1) GivePlayerItem(client, "weapon_hegrenade");
+	if(!GetConVarBool(cvar_grenade)) return;
+	new aleatorio = GetRandomInt(1, 100);
+	if(aleatorio == 1) GivePlayerItem(client, "weapon_hegrenade");
 }
 
 public OnClientPutInServer(client)
