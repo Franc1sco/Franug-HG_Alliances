@@ -12,7 +12,8 @@ Handle array_icons;
 
 Handle cvar_hp, cvar_grenade;
 
-#define DATA "1.1"
+#define DATA "1.1.1"
+
 public Plugin myinfo =
 {
 	name = "Hunger Games Alliance",
@@ -41,59 +42,47 @@ public void OnMapStart()
 {
 	ClearArray(array_icons_base);
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/3_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/3_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/3_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/3_icon.vtf");
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/5_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/5_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/5_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/5_icon.vtf");
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/6_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/6_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/6_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/6_icon.vtf");
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/7_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/7_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/7_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/7_icon.vtf");
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/8_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/8_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/8_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/8_icon.vtf");
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/9_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/9_icon.vtf");
-
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/10_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/10_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/9_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/9_icon.vtf");
 		
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/11_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/11_icon.vtf");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/11_icon.vmt");
+	AddFileToDownloadsTable("materials/sprites/franug/hg/districts/11_icon.vtf");
 
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/12_icon.vmt");
-	AddFileToDownloadsTable("materials/sprites/hg2/districts/12_icon.vtf");
-
-	PrecacheModel("materials/sprites/hg2/districts/3_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/3_icon.vmt");
 	PushArrayCell(array_icons_base, 3);
 
-	PrecacheModel("materials/sprites/hg2/districts/5_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/5_icon.vmt");
 	PushArrayCell(array_icons_base, 5);
 
-	PrecacheModel("materials/sprites/hg2/districts/6_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/6_icon.vmt");
 	PushArrayCell(array_icons_base, 6);
 
-	PrecacheModel("materials/sprites/hg2/districts/7_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/7_icon.vmt");
 	PushArrayCell(array_icons_base, 7);
 
-	PrecacheModel("materials/sprites/hg2/districts/8_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/8_icon.vmt");
 	PushArrayCell(array_icons_base, 8);
 
-	PrecacheModel("materials/sprites/hg2/districts/9_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/9_icon.vmt");
 	PushArrayCell(array_icons_base, 9);
-
-	PrecacheModel("materials/sprites/hg2/districts/10_icon.vmt");
-	PushArrayCell(array_icons_base, 10);
 		
-	PrecacheModel("materials/sprites/hg2/districts/11_icon.vmt");
+	PrecacheModel("materials/sprites/franug/hg/districts/11_icon.vmt");
 	PushArrayCell(array_icons_base, 11);
-
-	PrecacheModel("materials/sprites/hg2/districts/12_icon.vmt");
-	PushArrayCell(array_icons_base, 12);
 
 }
 
@@ -229,7 +218,7 @@ int CreateIcon(int client)
 
 	char valor[4], sprite[64];
 	Format(valor, 4, "%i", equipo[client]);
-	Format(sprite, 64, "sprites/hg2/districts/%i_icon.vmt", equipo[client]);
+	Format(sprite, 64, "sprites/franug/hg/districts/%i_icon.vmt", equipo[client]);
 		
 	DispatchKeyValue(Ent, "model", sprite);
 	DispatchKeyValue(Ent, "classname", valor);
